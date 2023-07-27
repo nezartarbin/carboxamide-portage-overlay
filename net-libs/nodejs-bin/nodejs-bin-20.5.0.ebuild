@@ -4,17 +4,20 @@ DESCRIPTION="A JavaScript runtime built on Chrome's V8 JavaScript engine"
 HOMEPAGE="https://nodejs.org/"
 LICENSE="Apache-1.1 Apache-2.0 BSD BSD-2 MIT"
 
-SRC_URI="https://unofficial-builds.nodejs.org/download/release/v20.2.0/node-v20.2.0-linux-x64-musl.tar.xz -> ${P}.tar.xz"
+SRC_URI="
+elibc_glibc? ( https://nodejs.org/dist/v20.5.0/node-v20.5.0-linux-x64.tar.xz -> ${P}.tar.xz )
+elibc_musl? ( https://unofficial-builds.nodejs.org/download/release/v20.5.0/node-v20.5.0-linux-x64-musl.tar.xz -> ${P}.tar.xz )
+"
 KEYWORDS="amd64"
 SLOT="0"
 
-S="${WORKDIR}/node-v${PV}-linux-x64-musl"
+S="${WORKDIR}/node-v${PV}-linux-x64"
 
 IUSE="doc"
 
 RDEPEND="app-arch/brotli
 	dev-libs/libuv
-	net-dns/c-ares	
+	net-dns/c-ares
   net-libs/nghttp2
 	sys-libs/zlib
 	dev-libs/icu
