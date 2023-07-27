@@ -1,0 +1,12 @@
+DEFINED_PHASES=install
+DEPEND=app-arch/brotli dev-libs/libuv net-dns/c-ares net-libs/nghttp2 sys-libs/zlib dev-libs/icu dev-libs/openssl sys-devel/gcc:*
+DESCRIPTION=A JavaScript runtime built on Chrome's V8 JavaScript engine
+EAPI=7
+HOMEPAGE=https://nodejs.org/
+IUSE=doc
+KEYWORDS=amd64
+LICENSE=Apache-1.1 Apache-2.0 BSD BSD-2 MIT
+RDEPEND=app-arch/brotli dev-libs/libuv net-dns/c-ares net-libs/nghttp2 sys-libs/zlib dev-libs/icu dev-libs/openssl sys-devel/gcc:*
+SLOT=0
+SRC_URI=elibc_glibc? ( https://nodejs.org/dist/v20.5.0/node-v20.5.0-linux-x64.tar.xz -> nodejs-bin-20.5.0.tar.xz ) elibc_musl? ( https://unofficial-builds.nodejs.org/download/release/v20.5.0/node-v20.5.0-linux-x64-musl.tar.xz -> nodejs-bin-20.5.0.tar.xz )
+_md5_=6f3d592229af4c7332bbf8a179bdcba6

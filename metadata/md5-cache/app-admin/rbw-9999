@@ -1,0 +1,13 @@
+BDEPEND=virtual/rust >=dev-vcs/git-1.8.2.1[curl] >=virtual/rust-1.53
+DEFINED_PHASES=compile configure install prepare test unpack
+DEPEND=app-crypt/pinentry
+DESCRIPTION=Unofficial Bitwarden cli
+EAPI=8
+HOMEPAGE=https://github.com/doy/rbw
+INHERIT=git-r3 cargo
+IUSE=debug
+LICENSE=MIT
+PROPERTIES=live
+SLOT=0
+_eclasses_=git-r3	27e13c09a4c7e4c78ac812f74727e676	toolchain-funcs	513c31b3346458ed1f3878b57da6d61c	multilib	c19072c3cd7ac5cb21de013f7e9832e0	flag-o-matic	ad475baa777c9978fa035216c8264a10	multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	cargo	8520ae1bed0e6965d027399b471a3595
+_md5_=2fe2e083180b74df08682cd99a50d73b
