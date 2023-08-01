@@ -9,7 +9,7 @@ elibc_glibc? ( https://nodejs.org/dist/v20.5.0/node-v20.5.0-linux-x64.tar.xz -> 
 elibc_musl? ( https://unofficial-builds.nodejs.org/download/release/v20.5.0/node-v20.5.0-linux-x64-musl.tar.xz -> ${P}.tar.xz )
 "
 KEYWORDS="amd64"
-SLOT="0"
+SLOT="${PV}"
 
 S="${WORKDIR}/node-v${PV}-linux-x64"
 
@@ -26,30 +26,30 @@ RDEPEND="app-arch/brotli
 
 DEPEND="${RDEPEND}"
 
-src_install(){
+src_install() {
+  local node_dir="/opt/node-${PV}"
 	# Install Node
-	dobin "${S}"/bin/node
+  # into "${node_dir}" &&
+    # dobin "${S}"/bin/node ||
+    # due "Error installing node binary into ${node_dir}"
 	# Libraries
-	insinto "/usr/lib" &&
-		doins -r "${S}"/lib/* ||
-		die "Error installing libraries into /usr/lib."
+	insinto "${node_dir}/" &&
+		doins -r "${S}"/* ||
+		die "Error installing nodeJS files into ${node_dir}"
 
-	# FIX: Those symlinks are broken due to wrong permissions, set by our friend, portage. Thank you portage.
-	# I'll figure it out soon.
-  fperms -R 755 /usr/lib/node_modules/corepack/dist
-	fperms -R 755 /usr/lib/node_modules/npm/bin
+  fperms -R 755 "${node_dir}"/lib/node_modules/corepack/dist
+	fperms -R 755 "${node_dir}"/lib/node_modules/npm/bin
 
-	dosym "/usr/lib/node_modules/corepack/dist/corepack.js" "/usr/bin/corepack"
-	dosym "/usr/lib/node_modules/npm/bin/npm-cli.js" "/usr/bin/npm"
-	dosym "/usr/lib/node_modules/npm/bin/npx-cli.js" "/usr/bin/npx"
+	dosym "${node_dir}/lib/node_modules/corepack/dist/corepack.js" "${node_dir}/bin/corepack"
+	dosym "${node_dir}/lib/node_modules/npm/bin/npm-cli.js" "${node_dir}/bin/npm"
+	dosym "${node_dir}/lib/node_modules/npm/bin/npx-cli.js" "${node_dir}/bin/npx"
 
-	doheader -r "${S}"/include/*
 	default
 
-	if use doc; then
-		dodoc -r "${S}"/share/doc/*
-		doman "${S}"/share/man/man1/node.1
+	# if use doc; then
+		# dodoc -r "${S}"/share/doc/*
+		# doman "${S}"/share/man/man1/node.1
 		# NPM
-		doman "${S}"/lib/node_modules/npm/man{1,5,7}/*
-	fi
+		# doman "${S}"/lib/node_modules/npm/man{1,5,7}/*
+	# fi
 }
