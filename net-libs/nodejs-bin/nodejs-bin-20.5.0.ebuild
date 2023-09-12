@@ -18,7 +18,7 @@ IUSE="doc"
 RDEPEND="app-arch/brotli
 	dev-libs/libuv
 	net-dns/c-ares
-  net-libs/nghttp2
+	net-libs/nghttp2
 	sys-libs/zlib
 	dev-libs/icu
 	dev-libs/openssl
@@ -27,18 +27,14 @@ RDEPEND="app-arch/brotli
 DEPEND="${RDEPEND}"
 
 src_install() {
-  local node_dir="/opt/node-${PV}"
-	# Install Node
-  # into "${node_dir}" &&
-    # dobin "${S}"/bin/node ||
-    # due "Error installing node binary into ${node_dir}"
-	# Libraries
+  local node_dir="/usr/share/node-${PV}"
 	insinto "${node_dir}/" &&
 		doins -r "${S}"/* ||
 		die "Error installing nodeJS files into ${node_dir}"
 
   fperms -R 755 "${node_dir}"/lib/node_modules/corepack/dist
 	fperms -R 755 "${node_dir}"/lib/node_modules/npm/bin
+	fperms -R 755 "${node_dir}"/bin/node
 
 	dosym "${node_dir}/lib/node_modules/corepack/dist/corepack.js" "${node_dir}/bin/corepack"
 	dosym "${node_dir}/lib/node_modules/npm/bin/npm-cli.js" "${node_dir}/bin/npm"
